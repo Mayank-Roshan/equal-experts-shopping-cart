@@ -80,4 +80,21 @@ class ShoppingCartTest {
         assertEquals(16.90,totalPayable);
     }
 
+    @Test
+    void shoudlReturnExpectedOutPutForStubbedInput(){
+        String expectedSummary = "Cart contains 2*Corn Flakes @2.52\n" +
+                "Cart contains 1*Weetabix @9.98\n" +
+                "SubTotal = 15.02\n" +
+                "Tax = 1.88\n" +
+                "Total = 16.9\n";
+        ShoppingCart cart = new ShoppingCart();
+        var cornflakes = new Product("Corn Flakes",2.52);
+        var weetabix = new Product("Weetabix",9.98);
+        cart.addProduct("cornflakes",cornflakes);
+        cart.addProduct("cornflakes",cornflakes);
+        cart.addProduct("weetabix",weetabix);
+        cart.calculateCartValues();
+        assertEquals(expectedSummary,cart.getSummary());
+    }
+
 }

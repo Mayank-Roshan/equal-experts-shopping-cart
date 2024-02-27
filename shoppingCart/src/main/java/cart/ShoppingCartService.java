@@ -10,8 +10,7 @@ import java.util.List;
 @Service
 public class ShoppingCartService {
 
-    @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     public ShoppingCartService() {
         productService = new ProductService();

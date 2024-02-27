@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.json.JSONException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,11 @@ class ProductServiceTest {
         mockWebTestServer.start();
         objectMapper = new ObjectMapper();
         productService = new ProductService();
+    }
+
+    @AfterEach
+    void destroy() throws IOException {
+        mockWebTestServer.close();
     }
 
 
