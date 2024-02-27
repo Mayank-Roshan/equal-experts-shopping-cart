@@ -11,7 +11,7 @@ Write some code that provides the following basic shopping cart capabilities:
 
 1. Add a product to the cart
    1. Specifying the product name and quantity
-   2. Use the product name to discover the price from the [Product API](#product-api) specified below
+   2. Use the product name to discover the price from the [product API](#product-api) specified below
    3. Cart state (totals, etc.) must be available
 
 2. Calculate the state:
@@ -20,11 +20,11 @@ Write some code that provides the following basic shopping cart capabilities:
    3. Total payable (subtotal + tax)
    4. Totals should be rounded up where required
 
-## Product API
+## product API
 
 Base URL: `https://equalexperts.github.io/`
 
-View Product: `GET /backend-take-home-test-data/{product}.json`
+View product: `GET /backend-take-home-test-data/{product}.json`
 
 Available products
 * `cheerios`

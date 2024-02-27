@@ -8,3 +8,5 @@
  */
 
 rootProject.name = 'gradle-groovy'
+include 'shoppingCart'
+
