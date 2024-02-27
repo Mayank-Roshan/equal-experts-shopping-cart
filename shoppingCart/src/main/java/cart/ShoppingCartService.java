@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class ShoppingCartService {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ShoppingCartService() {
         productService = new ProductService();

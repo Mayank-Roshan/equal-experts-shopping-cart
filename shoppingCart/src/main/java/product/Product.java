@@ -3,10 +3,10 @@ package product;
 
 public class Product {
 
-    private String name;
+    private final String name;
     private int quantity;
 
-    private double unitPrice;
+    private final double unitPrice;
 
     public Product(String name,double unitPrice) {
         this.name = name;

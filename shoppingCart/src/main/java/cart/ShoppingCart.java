@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class ShoppingCart {
-    private HashMap<String,Product> products;
+    private final HashMap<String,Product> products;
     private double subTotalPrice;
     private double tax;
     private double totalPayable;
