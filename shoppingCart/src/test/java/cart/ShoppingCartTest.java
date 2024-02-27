@@ -3,7 +3,7 @@ package cart;
 import org.junit.jupiter.api.Test;
 import product.Product;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ShoppingCartTest {
 

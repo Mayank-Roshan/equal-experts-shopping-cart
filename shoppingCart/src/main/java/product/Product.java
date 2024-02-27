@@ -1,8 +1,6 @@
 package product;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class Product {
 
     private ProductService productService;
