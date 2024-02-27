@@ -5,12 +5,12 @@ public class ProductInfo {
 
     private String title;
 
+    private double price;
+
     public ProductInfo(String title, double price) {
         this.title = title;
         this.price = price;
     }
-
-    private double price;
 
     public String getTitle() {
         return title;

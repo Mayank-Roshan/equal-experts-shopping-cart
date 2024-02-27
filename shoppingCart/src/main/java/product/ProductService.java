@@ -6,7 +6,6 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ProductService {
-    WebClient equalExpertsClient;
 
     public Mono<ProductInfo> getProductInfo(String name){
 

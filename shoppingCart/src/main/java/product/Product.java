@@ -3,7 +3,6 @@ package product;
 
 public class Product {
 
-    private ProductService productService;
     private String name;
     private int quantity;
 

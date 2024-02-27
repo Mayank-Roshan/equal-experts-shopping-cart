@@ -33,9 +33,8 @@ class ProductServiceTest {
         mockWebTestServer.close();
     }
 
-
     @Test
-    void shouldFetchDataFromProductApi() throws JSONException, JsonProcessingException {
+    void shouldFetchDataFromProductApi() throws  JsonProcessingException {
         ProductInfo mockWeetabix = new ProductInfo("Weetabix",9.98);
         mockWebTestServer.enqueue(new MockResponse()
                 .setBody(objectMapper.writeValueAsString(mockWeetabix))
