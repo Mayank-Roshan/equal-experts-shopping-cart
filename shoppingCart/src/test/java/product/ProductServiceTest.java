@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,6 @@ class ProductServiceTest {
         mockWebTestServer.enqueue(new MockResponse()
                 .setBody(objectMapper.writeValueAsString(mockWeetabix))
                 .addHeader("Content-Type", "application/json"));
-
         StepVerifier.create(productService.getProductInfo("weetabix"))
                 .consumeNextWith(product -> {
                     Assertions.assertEquals("Weetabix",product.getTitle());

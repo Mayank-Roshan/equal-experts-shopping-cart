@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShoppingCartTest {
 
     @Test
-    void shouldAddNewProductsToMap(){
+    void shouldAddNewProductsToMapIfTheyDoNotExist(){
         ShoppingCart cart = new ShoppingCart();
         var cheerios = new Product("Cheerios",8.43);
         var weetabix = new Product("weetabix",9.98);
@@ -23,9 +23,8 @@ class ShoppingCartTest {
         assertEquals(weetabix.getName(),resultWeetabix.getName());
     }
 
-
     @Test
-    void shouldNotAddExistingProductsToMap(){
+    void shouldIncreaseQuantityOfExistingProductsInMap(){
         ShoppingCart cart = new ShoppingCart();
         var cheerios = new Product("Cheerios",8.43);
         var weetabix = new Product("weetabix",9.98);
@@ -40,6 +39,45 @@ class ShoppingCartTest {
         assertEquals(cheerios.getUnitPrice(),resultCheerios.getUnitPrice());
         assertEquals(2,resultWeetabix.getQuantity());
         assertEquals(weetabix.getName(),resultWeetabix.getName());
+    }
+
+    @Test
+    void shouldReturnSubTotalPriceAs15_02For2CornflakesAnd1Weetabix(){
+        ShoppingCart cart = new ShoppingCart();
+        var cornflakes = new Product("Corn Flakes",2.52);
+        var weetabix = new Product("Weetabix",9.98);
+        cart.addProduct("cornflakes",cornflakes);
+        cart.addProduct("cornflakes",cornflakes);
+        cart.addProduct("weetabix",weetabix);
+        assertEquals(2,cart.getProducts().size());
+        cart.calculateCartValues();
+        var subTotalPrice = cart.getSubTotalPrice();
+        assertEquals(15.02,subTotalPrice);
+    }
+
+    @Test
+    void shouldReturn1_88TaxForTwoCornFlakesAndOneWeetabix(){
+        ShoppingCart cart = new ShoppingCart();
+        var cornflakes = new Product("Corn Flakes",2.52);
+        var weetabix = new Product("Weetabix",9.98);
+        cart.addProduct("cornflakes",cornflakes);
+        cart.addProduct("cornflakes",cornflakes);
+        cart.addProduct("weetabix",weetabix);
+        cart.calculateCartValues();
+        var tax = cart.getTax();
+        assertEquals(1.88,tax);
+    }
+    @Test
+    void shouldReturn16_90TotalPayableForTwoCornFlakesAndOneWeetabix(){
+        ShoppingCart cart = new ShoppingCart();
+        var cornflakes = new Product("Corn Flakes",2.52);
+        var weetabix = new Product("Weetabix",9.98);
+        cart.addProduct("cornflakes",cornflakes);
+        cart.addProduct("cornflakes",cornflakes);
+        cart.addProduct("weetabix",weetabix);
+        cart.calculateCartValues();
+        var totalPayable = cart.getTotalPayable();
+        assertEquals(16.90,totalPayable);
     }
 
 }

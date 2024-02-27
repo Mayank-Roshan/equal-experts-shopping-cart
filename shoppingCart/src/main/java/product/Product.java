@@ -15,7 +15,6 @@ public class Product {
         this.name = name;
         this.quantity = 1;
         this.unitPrice = unitPrice;
-
     }
 
     public String getName(){
