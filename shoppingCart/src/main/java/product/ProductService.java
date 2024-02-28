@@ -7,14 +7,14 @@ import reactor.core.publisher.Mono;
 @Service
 public class ProductService {
 
-    public Mono<ProductInfo> getProductInfo(String name){
+    public Mono<ProductInfo> getProductInfo(String baseUrl,String name){
 
         return WebClient
-                .create("https://equalexperts.github.io/")
+                .create(baseUrl)
                 .get()
                 .uri("/backend-take-home-test-data/"+name+".json")
                 .retrieve()
-                .bodyToMono(ProductInfo.class);
-//                .onErrorReturn(null);
+                .bodyToMono(ProductInfo.class)
+                .onErrorReturn(new ProductInfo("",-1) );
     }
 }

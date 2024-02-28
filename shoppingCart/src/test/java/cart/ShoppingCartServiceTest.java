@@ -34,7 +34,7 @@ class ShoppingCartServiceTest {
 
     @AfterEach
     void destroy() throws IOException {
-        mockWebTestServer.close();
+        mockWebTestServer.shutdown();
     }
 
     @Test

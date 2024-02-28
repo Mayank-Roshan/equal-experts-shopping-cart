@@ -15,6 +15,8 @@ import java.io.IOException;
 class ProductServiceTest {
 
     private MockWebServer mockWebTestServer;
+
+    String baseUrl;
     ObjectMapper objectMapper;
 
     ProductService productService;
@@ -25,24 +27,33 @@ class ProductServiceTest {
         mockWebTestServer.start();
         objectMapper = new ObjectMapper();
         productService = new ProductService();
+        baseUrl = "http://localhost:"+mockWebTestServer.getPort()+"/dummyDomain";
     }
 
     @AfterEach
     void destroy() throws IOException {
-        mockWebTestServer.close();
+        mockWebTestServer.shutdown();
     }
 
     @Test
     void shouldFetchDataFromProductApi() throws  JsonProcessingException {
-        ProductInfo mockWeetabix = new ProductInfo("Weetabix",9.98);
-        mockWebTestServer.enqueue(new MockResponse()
+        ProductInfo mockWeetabix = new ProductInfo("Cheerios",9.98);
+        mockWebTestServer.enqueue(new MockResponse().setResponseCode(200)
                 .setBody(objectMapper.writeValueAsString(mockWeetabix))
                 .addHeader("Content-Type", "application/json"));
-        StepVerifier.create(productService.getProductInfo("weetabix"))
+        StepVerifier.create(productService.getProductInfo(baseUrl,"weetabix"))
                 .consumeNextWith(product -> {
-                    Assertions.assertEquals("Weetabix",product.getTitle());
+                    Assertions.assertEquals("Cheerios",product.getTitle());
                     Assertions.assertEquals(9.98,product.getPrice());
-
+                })
+                .verifyComplete();
+    }
+    @Test
+    void shouldReturnEmptyProductInfoDataFromProductApi() throws  JsonProcessingException {
+        mockWebTestServer.enqueue(new MockResponse().setResponseCode(404));
+        StepVerifier.create(productService.getProductInfo(baseUrl,"corn flakes"))
+                .consumeNextWith(product -> {
+                    Assertions.assertEquals(-1,product.getPrice());
                 })
                 .verifyComplete();
     }
