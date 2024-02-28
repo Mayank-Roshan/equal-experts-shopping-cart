@@ -49,12 +49,10 @@ class ProductServiceTest {
                 .verifyComplete();
     }
     @Test
-    void shouldReturnEmptyProductInfoDataFromProductApi() throws  JsonProcessingException {
+    void shouldReturnEmptyProductInfoDataFromProductApi() {
         mockWebTestServer.enqueue(new MockResponse().setResponseCode(404));
         StepVerifier.create(productService.getProductInfo(baseUrl,"corn flakes"))
-                .consumeNextWith(product -> {
-                    Assertions.assertEquals(-1,product.getPrice());
-                })
+                .consumeNextWith(product -> Assertions.assertEquals(-1,product.getPrice()))
                 .verifyComplete();
     }
 
